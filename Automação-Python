@@ -1,53 +1,46 @@
-# Projeto-Python , com esses código abaixo voçê abrirá um navegador, baixará um arquivo, realizará um cálculo nas colunas selecionadas da planilha e enviará um email.
-
-pyautogui.pause = 1
-#abrir navegador
-pyautogui.press('winleft')
-pyautogui.write('edge')
-pyautogui.press('enter')
-pyautogui.alert('Vai começar, aperte ok e não mexa em nada')
+# Projeto-Python , os códigos abaixo irão abrir o link copiado, baixar uma planilha, e enviar o email com a planilha em anexo.
 pyautogui.hotkey('ctrl','t')
-
-#abrir o drive
-link = ('https://drive.google.com/drive/folders/149xknr9JvrlEnhNWO49zPcw0PW5icxga')
-pyperclip.copy(link)
+pyperclip.copy('https://drive.google.com/drive/folders/14oLE59U1RqyRqlBbKpsyymW-mitvbtoh')
+pyautogui.hotkey('ctrl','v')
+pyautogui.press('enter')
+pyautogui.pause=1
+time.sleep(5)
+pyautogui.click(x=387,y=383)
+time.sleep(3)
+pyautogui.click(x=1109,y=153)
+time.sleep(3)
+pyautogui.click(x=883,y=556)
+time.sleep(3)
+pyautogui.click(x=954 ,y= 121)
+time.sleep(5)
+pyautogui.hotkey('ctrl','t')
+pyperclip.copy('COLOCAR-LINK-DO-SEU-EMAIL')
 pyautogui.hotkey('ctrl','v')
 pyautogui.press('enter')
 time.sleep(5)
-
-#indicar os locais dos clicks
-pyautogui.click(369,264,clicks = 2)
-pyautogui.click(385,351)
-pyautogui.click(1106, 161)
-pyautogui.click(900,561)
-
-#baixar a base de dados
-import pandas as pd
-df = pd.read_excel(r"Documents/Vendas - Dez.xlsx")
-print(df)
-
-#calcular indicadores
-faturamento = df['valor final'].sum()
-qtde_produtos = df['Quantidade'].sum()
-
-#enviando e-mail: 
-pyautogui.hotkey("ctrl","t")
-pyperclip.copy("https://mail.google.com/mail/u/0/?hl=pt-BR#inbox")
-pyautogui.hotkey("ctrl","v")
-pyautogui.press("enter")
+pyautogui.click(x=86, y=162)
+time.sleep(3)
+pyautogui.write('ESCREVER-EMAIL-DESEJADO')
+pyautogui.press('enter')
 time.sleep(5)
-pyautogui.click(x=86,y=162)
-pyautogui.write("escreve-email-desejado@.com")
-pyautogui.press("tab")
-pyautogui.press("tab")
-pyperclip.copy("Relatório de Vendas")
-pyautogui.hotkey("ctrl","v")
-pyautogui.press("tab")
+pyautogui.press('tab')
+time.sleep(4)
+pyautogui.write('Relatorio de Vendas')
+pyautogui.press('enter')
+pyautogui.press('tab')
+time.sleep(4)
 texto = f"""
-Prezados, bom dia!
-O faturamento de ontem foi de: R${faturamento:,.2f}
-A quantidade de produto foi de: R${quantidade:,.2f}
-Abs, Renato Sandro. """
+Prezados, bom dia!,
+Envio o relatório em anexo.
+Gostaria de informar também, que deu tudo certo no projeto de automação com Python.
+Abs,Renato Sandro!"""
 pyperclip.copy(texto)
-pyautogui.hotkey("ctrl","v")
-pyautogui.hotkey("ctrl","enter")
+pyautogui.hotkey('ctrl','v')
+time.sleep(5)
+pyautogui.click(x=916,y=686 )
+time.sleep(5)
+pyautogui.click(x=212 ,y=186 )
+time.sleep(5)
+pyautogui.click(x= 516,y=446 )
+time.sleep(7)
+pyautogui.hotkey('ctrl','enter')
