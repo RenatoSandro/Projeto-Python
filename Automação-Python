@@ -1,0 +1,53 @@
+# Projeto-Python , com esses código abaixo voçê abrirá um navegador, baixará um arquivo, realizará um cálculo nas colunas selecionadas da planilha e enviará um email.
+
+pyautogui.pause = 1
+#abrir navegador
+pyautogui.press('winleft')
+pyautogui.write('edge')
+pyautogui.press('enter')
+pyautogui.alert('Vai começar, aperte ok e não mexa em nada')
+pyautogui.hotkey('ctrl','t')
+
+#abrir o drive
+link = ('https://drive.google.com/drive/folders/149xknr9JvrlEnhNWO49zPcw0PW5icxga')
+pyperclip.copy(link)
+pyautogui.hotkey('ctrl','v')
+pyautogui.press('enter')
+time.sleep(5)
+
+#indicar os locais dos clicks
+pyautogui.click(369,264,clicks = 2)
+pyautogui.click(385,351)
+pyautogui.click(1106, 161)
+pyautogui.click(900,561)
+
+#baixar a base de dados
+import pandas as pd
+df = pd.read_excel(r"Documents/Vendas - Dez.xlsx")
+print(df)
+
+#calcular indicadores
+faturamento = df['valor final'].sum()
+qtde_produtos = df['Quantidade'].sum()
+
+#enviando e-mail: 
+pyautogui.hotkey("ctrl","t")
+pyperclip.copy("https://mail.google.com/mail/u/0/?hl=pt-BR#inbox")
+pyautogui.hotkey("ctrl","v")
+pyautogui.press("enter")
+time.sleep(5)
+pyautogui.click(x=86,y=162)
+pyautogui.write("escreve-email-desejado@.com")
+pyautogui.press("tab")
+pyautogui.press("tab")
+pyperclip.copy("Relatório de Vendas")
+pyautogui.hotkey("ctrl","v")
+pyautogui.press("tab")
+texto = f"""
+Prezados, bom dia!
+O faturamento de ontem foi de: R${faturamento:,.2f}
+A quantidade de produto foi de: R${quantidade:,.2f}
+Abs, Renato Sandro. """
+pyperclip.copy(texto)
+pyautogui.hotkey("ctrl","v")
+pyautogui.hotkey("ctrl","enter")
